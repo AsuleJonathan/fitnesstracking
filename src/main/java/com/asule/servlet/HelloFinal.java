@@ -5,17 +5,25 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class HelloFinal extends HttpServlet{
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-                PrintWriter print = ((ServletResponse) req).getWriter();
+@WebServlet("/final")
+public class HelloFinal extends HttpServlet {
 
-        // Now, you can use 'print' to write to the response
-        print.println("Hello final World!");
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+
+        PrintWriter print = resp.getWriter();
+        print.print("This is the final hello world, can only be accessed using get method!!");
+
     }
 
-    
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+
+        PrintWriter print = resp.getWriter();
+        print.print("This is the final hello world, can only be accessed using post method!!");
+
+    }
 }

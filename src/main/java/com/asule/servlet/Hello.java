@@ -8,34 +8,37 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
 
-public class Hello implements Servlet{
+@WebServlet("/activate")
+public class Hello implements Servlet {
 
     @Override
-    public void destroy() {
-        throw new UnsupportedOperationException("Unimplemented method 'destroy'");
+    public void init(ServletConfig servletConfig) throws ServletException {
+
+        System.out.println("The hello servlet has been created");
+
     }
 
     @Override
     public ServletConfig getServletConfig() {
-        throw new UnsupportedOperationException("Unimplemented method 'getServletConfig'");
+        return null;
+    }
+
+    @Override
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+
+        PrintWriter print = servletResponse.getWriter();
+        print.print("<b>Hello world </b>" + servletRequest.getParameter("name"));
     }
 
     @Override
     public String getServletInfo() {
-        throw new UnsupportedOperationException("Unimplemented method 'getServletInfo'");
+        return null;
     }
 
     @Override
-    public void init(ServletConfig arg0) throws ServletException {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'init'");
+    public void destroy() {
+        System.out.println("Shutting down hello class!");
     }
-
-    @Override
-    public void service(ServletRequest arg0, ServletResponse arg1) throws ServletException, IOException {
-       
-        throw new UnsupportedOperationException("Unimplemented method 'service'");
-    }
-    
 }
