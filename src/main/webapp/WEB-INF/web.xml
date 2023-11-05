@@ -12,5 +12,26 @@
     <servlet-name>Jonathan</servlet-name>
     <url-pattern>/activate</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+   <servlet-name>Jonathan2</servlet-name>
+    <servlet-class> com.asule.servlet.HelloAgain</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Jonathan2</servlet-name>
+    <url-pattern>/again</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+   <servlet-name>Jonathan3</servlet-name>
+    <servlet-class> com.asule.servlet.HelloFinal</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Jonathan3</servlet-name>
+    <url-pattern>/final</url-pattern>
+  </servlet-mapping>
   
 </web-app>
