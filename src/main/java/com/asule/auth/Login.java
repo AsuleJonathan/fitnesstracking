@@ -8,19 +8,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.annotation.WebInitParam;
 
-@WebServlet("/login")
+@WebServlet(urlPatterns = "/login", initParams = {
+    @WebInitParam(name = "username", value = "asule"),
+    @WebInitParam(name = "password", value = "123")
+})
 public class Login extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        PrintWriter print = resp.getWriter();
+        
+        if (username.equals("asule") && password.equals("123")) {
+            RequestDispatcher dispatcher = req.getRequestDispatcher("./application");
+            dispatcher.include(req, resp);
 
-        if (username.equals("asule") && password.equals("123"))
-            print.write("Welcome to Ajay Fitness");
-        else
+        } else {
+            PrintWriter print = resp.getWriter();
             print.write("<html><body>Invalid login details <a href=\".\"> Login again </a></body></html>");
+        }
     }
 }
 
