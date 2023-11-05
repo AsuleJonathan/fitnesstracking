@@ -3,12 +3,15 @@ package com.asule.auth;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletContext;
+import org.apache.commons.lang3.StringUtils;
+import java.util.Date;
 
 @WebServlet(urlPatterns = "/login")
 public class Login extends HttpServlet {
@@ -26,7 +29,7 @@ public class Login extends HttpServlet {
         && password.equals(ctx.getInitParameter("password"))) {
             
             ctx.setAttribute("username", username);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("./application");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("./home");
             dispatcher.include(req, resp);
 
         } else {
