@@ -4,4 +4,13 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+   <servlet-name>Jonathan</servlet-name>
+    <servlet-class> com.asule.servlet.Hello</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jonathan</servlet-name>
+    <url-pattern>/activate</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
