@@ -20,11 +20,11 @@ public class AppInit implements ServletContextListener {
         database.getUsers().add(new User(0L, "john.doe@test.com", "54321"));
         database.getUsers().add(new User(0L, "jane.doe@test.com", "00000"));
 
-        database.getMembers().add(new Member("1", "David", null));
-        database.getMembers().add(new Member("2", "Sofia", null));
-        database.getMembers().add(new Member("3", "Wesley", null));
-        database.getMembers().add(new Member("4", "Marcus", null));
-        database.getMembers().add(new Member("5", "Julia", null));
+        database.getMembers().add(new Member("1", "David", "50 kgs", "Do more footwork"));
+        database.getMembers().add(new Member("2", "Sofia", "79 kgs", "More Trendmills"));
+        database.getMembers().add(new Member("3", "Wesley", "40 kgs", "Improve your diet"));
+        database.getMembers().add(new Member("4", "Marcus", "60 kgs", "General exercise"));
+        database.getMembers().add(new Member("5", "Somi", "100 kgs", "might charge you double"));
 
     }
 

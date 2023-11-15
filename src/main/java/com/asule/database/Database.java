@@ -43,7 +43,7 @@ public class Database implements Serializable {
         return members;
     }
 
-    public void setAccounts(List<Member> members) {
+    public void setMembers(List<Member> members) {
         this.members = members;
     }
 

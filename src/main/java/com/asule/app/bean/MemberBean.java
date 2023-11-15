@@ -1,34 +1,31 @@
 package com.asule.app.bean;
 
 import com.asule.app.model.entity.Member;
+import com.asule.app.view.html.HtmlComponent;
 import com.asule.database.Database;
 
 import java.io.Serializable;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class MemberBean implements MemberBeanI, Serializable {
 
-public String MembersDetails() {
-    List<Member> members = Database.getDbInstance().getMembers();
-
-    StringBuilder detailsBuilder = new StringBuilder();
-
-    detailsBuilder.append("<table>");
-    detailsBuilder.append("<tr><th>ID</th><th>Name</th></tr>");
-
-    for (Member member : members) {
-        detailsBuilder.append("<tr>");
-        detailsBuilder.append("<td>").append(StringUtils.trimToEmpty(member.getId())).append("</td>");
-        detailsBuilder.append("<td>").append(StringUtils.trimToEmpty(member.getName())).append("</td>");
-        detailsBuilder.append("</tr>");
+    @Override
+    public String MembersDetails() {
+        List<Member> members = Database.getDbInstance().getMembers();
+        // Implement the logic to generate details about members
+        // For example, you can iterate through the list and concatenate member details
+        StringBuilder details = new StringBuilder();
+        
+        for (Member member : members) {
+            details.append("Member ID: ").append(member.getId())
+                   .append(", Name: ").append(member.getName())
+                   .append(", Weight: ").append(member.getWeight())
+                   .append(", Notes: ").append(member.getNotes())
+                   .append("\n");
+        }
+        
+        return details.toString();
     }
-
-    detailsBuilder.append("</table>");
-
-    return detailsBuilder.toString();
-}
 
     public Member addOrUpdateMember(Member member) {
         Database database = Database.getDbInstance();
@@ -36,11 +33,14 @@ public String MembersDetails() {
         return member;
     }
 
-    @Override
-    public void deleteAccount(Member member) {
+    public void deleteMember(Member member) {
         Database database = Database.getDbInstance();
-        List<Member> members = database.getMembers();
-        members.removeIf(m -> m.getId().equals(member.getId()));
+        database.getMembers().remove(member);
     }
 
+    @Override
+    public void deleteAccount(Member member) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteAccount'");
+    }
 }

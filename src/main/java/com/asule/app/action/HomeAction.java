@@ -2,7 +2,9 @@ package com.asule.app.action;
 
 import com.asule.app.bean.MemberBean;
 import com.asule.app.bean.MemberBeanI;
+import com.asule.app.model.entity.Member;
 import com.asule.app.view.html.AppPage;
+import com.asule.app.view.html.HtmlComponent;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
@@ -22,14 +24,7 @@ public class HomeAction extends HttpServlet {
         HttpSession httpSession = req.getSession();
 
         new AppPage().renderHtml(req, resp, 0,
-        "<h2>Members details</h2>" +
-            "<br/>Add Member<br/><form action=\"./members\" method=\"post\">" +
-                "  <label for=\"code\">Member ID:</label><br>" +
-                "  <input type=\"number\" id=\"number\" name=\"code\" ><br>" +
-                "  <label for=\"name\">Member Name:</label><br>" +
-                "  <input type=\"text\" id=\"name\" name=\"name\" ><br><br>" +
-                "  <input type=\"submit\" value=\"Submit\">" +
-            "</form><br/>" + memberBean.MembersDetails());
+                HtmlComponent.form(Member.class) + memberBean.MembersDetails());
 
     }
 

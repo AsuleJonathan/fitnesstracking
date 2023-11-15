@@ -1,33 +1,49 @@
 package com.asule.app.model.entity;
 
-import org.apache.commons.lang3.StringUtils;
+import com.asule.app.view.html.AsuleHtmlForm;
+import com.asule.app.view.html.AsuleHtmlFormField;
+import com.asule.app.view.html.AsuleTableColHeader;
 
 import java.io.Serializable;
 
+@AsuleHtmlForm(label = "Member", url = "./members")
 public class Member implements Serializable {
 
+    @AsuleTableColHeader(header = "Id Of The Member")
+    @AsuleHtmlFormField(label = "Member Id")
     private String Id;
 
+    @AsuleTableColHeader(header = "Name Of the member")
+    @AsuleHtmlFormField(label = "Member Name")
     private String name;
 
     
+    @AsuleTableColHeader(header = "Weight Of the member")
+    @AsuleHtmlFormField(label = "Member Weight")
+    private String weight;
 
-    public Member(){
 
+    @AsuleTableColHeader(header = "Notes On the member")
+    @AsuleHtmlFormField(label = "Members Notes")
+    private String notes;
+
+    public Member() {
     }
 
-    public Member(String id, String name, Object object){
-        this.Id = id;
+    public Member(String Id, String name, String weight, String notes) {
+        this.Id = Id;
         this.name = name;
-       
+        this.weight = weight;
+        this.notes = notes;
     }
+    
 
     public String getId() {
         return Id;
     }
 
-    public void setCode(String id) {
-        this.Id = id;
+    public void setId(String Id) {
+        this.Id = Id;
     }
 
     public String getName() {
@@ -38,16 +54,19 @@ public class Member implements Serializable {
         this.name = name;
     }
 
+    public String getWeight() {
+        return weight;
+    }
 
-    public String tableRow(){
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
 
-        StringBuilder trBuilder = new StringBuilder();
+    public String getNotes() {
+        return notes;
+    }
 
-        trBuilder.append("<tr>");
-        trBuilder.append("<td>").append(StringUtils.trimToEmpty(getId())).append("</td>");
-        trBuilder.append("<td>").append(StringUtils.trimToEmpty(getName())).append("</td>");
-        trBuilder.append("<tr>");
-
-        return trBuilder.toString();
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }
