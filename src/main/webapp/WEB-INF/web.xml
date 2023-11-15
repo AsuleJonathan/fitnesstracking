@@ -9,4 +9,17 @@
     <param-name>AppName</param-name>
     <param-value>Ajay Fitness</param-value>
   </context-param>
+<<<<<<< HEAD
+=======
+    <context-param>
+        <param-name>username</param-name>
+       <param-value>asule</param-value>
+    </context-param>
+
+   <context-param>
+      <param-name>password</param-name>
+        <param-value>asule123</param-value>
+    </context-param>
+
+>>>>>>> b5ad14254e74ba71eeee429b12c13fad17f02132
 </web-app>

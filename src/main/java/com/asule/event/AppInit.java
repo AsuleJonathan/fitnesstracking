@@ -1,5 +1,6 @@
 package com.asule.event;
 
+<<<<<<< HEAD
 import com.asule.app.model.entity.Member;
 import com.asule.app.model.entity.User;
 import com.asule.database.Database;
@@ -43,4 +44,8 @@ public class AppInit implements ServletContextListener {
 
     }
 
+=======
+public class AppInit {
+    
+>>>>>>> b5ad14254e74ba71eeee429b12c13fad17f02132
 }
