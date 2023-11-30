@@ -1,33 +1,26 @@
-# Use a base image with Maven for building and WildFly for runtime
-FROM maven:3.8.4-openjdk-11 AS build
+FROM maven:3.8.4-openjdk-11-slim AS build
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the POM file to the container
-COPY pom.xml .
 
-# Download the dependencies and plugins
-RUN mvn dependency:go-offline
+# Copy the source code
+COPY . .
 
-# Copy the source code to the container
-COPY src ./src
+# Build the project
+RUN mvn compile package
 
-# Build the application
-RUN mvn package -DskipTests
+# Continue with the rest of your Dockerfile
+FROM quay.io/wildfly/wildfly:26.1.3.Final-jdk11 AS deploy
 
-# Use the official WildFly base image for runtime
-FROM jboss/wildfly:latest
+RUN rm /opt/jboss/wildfly/standalone/configuration/standalone.xml
 
-# Set environment variables
-ENV WILDFLY_USER=admin \
-    WILDFLY_PASSWORD=admin
-
-# Copy the .war file from the build stage to the WildFly deployment directory
 COPY --from=build /app/target/FitnessTracking.war /opt/jboss/wildfly/standalone/deployments/
+COPY --from=build /app/standalone.xml /opt/jboss/wildfly/standalone/configuration/
 
-# Expose the ports needed by WildFly
-EXPOSE 8081 9990
+RUN mkdir -p /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
+COPY --from=build /app/module.xml /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
+COPY --from=build /app/mysql-connector-java-8.0.17.jar /opt/jboss/wildfly/modules/system/layers/base/com/mysql/main/
 
-# Start WildFly in standalone mode
-CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+EXPOSE 8081
+
+CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0"]

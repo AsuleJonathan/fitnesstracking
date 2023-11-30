@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 
-@WebFilter(urlPatterns = "/*")
+//@WebFilter(urlPatterns = "/*")
 public class AuthFilter implements Filter {
 
     @Override

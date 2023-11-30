@@ -1,0 +1,13 @@
+---
+- name: Build and Deploy Docker Image
+  hosts: localhost
+  tasks:
+
+    - name: Run Docker Container
+      command: docker run -d -p 8081:8081 myfitnesstracking
+      register: docker_run_result
+
+    - name: Check Docker Run Status
+      fail:
+        msg: "Docker run failed"
+      when: docker_run_result.rc != 0
