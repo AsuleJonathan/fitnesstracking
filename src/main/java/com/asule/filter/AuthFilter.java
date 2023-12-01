@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 
-//@WebFilter(urlPatterns = "/*")
+@WebFilter(urlPatterns = "/*")
 public class AuthFilter implements Filter {
 
     @Override
@@ -28,16 +28,11 @@ public class AuthFilter implements Filter {
         HttpSession httpSession = httpRequest.getSession();
 
         String servletPath = httpRequest.getServletPath();
-        System.out.println("servlet path: " + servletPath);
-        System.out.println("context path: " + httpRequest.getContextPath());
-        System.out.println("context URI: " + httpRequest.getRequestURI());
 
-        if (httpSession.isNew()) {
-            System.out.println("1.New Session");
+        if (httpSession.isNew() || StringUtils.isBlank((String) httpSession.getAttribute("loggedInId"))) {
             httpSession.invalidate();
 
-            if (servletPath.equals("/login") || servletPath.equals("/index.html")) {
-                System.out.println("2. Proceed to login...or index.html");
+            if (servletPath.equals("/login") || servletPath.equals("/user") || servletPath.contains(".jsp")) {
                 filterChain.doFilter(servletRequest, servletResponse);
 
             } else {
@@ -50,8 +45,7 @@ public class AuthFilter implements Filter {
             if (StringUtils.isNotBlank((String) httpSession.getAttribute("loggedInId"))) {
                 httpResponse.addHeader("AuthTime", DateFormat.getDateTimeInstance().format(new Date()));
                 filterChain.doFilter(servletRequest, servletResponse);
-            }
-            else {
+            }else {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/");
                 servletResponse.getWriter().flush();
 

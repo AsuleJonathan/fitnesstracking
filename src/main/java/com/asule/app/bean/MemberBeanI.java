@@ -1,12 +1,9 @@
 package com.asule.app.bean;
 
-import com.asule.app.model.entity.Member;
+import com.asule.app.model.Member;
 
-public interface MemberBeanI {
+import java.util.List;
 
-    String MembersDetails();
 
-    Member addOrUpdateMember(Member member);
-
-    void deleteAccount(Member member);
+public interface MemberBeanI extends GenericBeanI<Member> {
 }

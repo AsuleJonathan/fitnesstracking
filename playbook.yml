@@ -1,13 +1,22 @@
----
-- name: Build and Deploy Docker Image
-  hosts: localhost
+- name: Deploy Fitnesstracking application
+  hosts: all
+  become: true
   tasks:
+    - name: Recursively change the ownership
+      file:
+        path: /home/asule/Fitness
+        state: directory
+        recurse: yes
+        owner: jonathan
+        group: jonathan
 
-    - name: Run Docker Container
-      command: docker run -d -p 8081:8081 myfitnesstracking
-      register: docker_run_result
+    - name: Copy Docker Compose file
+      copy:
+        src: "/home/jonathan/Desktop/java EE/FitnessTracking/docker-compose.yml"  # Adjusted the path to escape spaces
+        dest: /home/asule/Fitness/docker-compose.yml
+        owner: jonathan
+        group: jonathan
+        mode: 755
 
-    - name: Check Docker Run Status
-      fail:
-        msg: "Docker run failed"
-      when: docker_run_result.rc != 0
+    - name: Deploy Fitnesstracking application
+      command: docker-compose -f /home/asule/Fitness/docker-compose.yml up -d

@@ -1,24 +1,27 @@
 package com.asule.app.action;
 
-import com.asule.app.model.entity.Customer;
-import com.asule.app.view.html.AppPage;
-import com.asule.app.view.html.HtmlComponent;
+import com.asule.app.bean.CustomerBeanI;
+import com.asule.app.model.Customer;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("customers")
-public class CustomerAction extends BaseAction{
+@WebServlet("/customers")
+public class CustomerAction extends BaseAction {
+
+    @EJB
+    private CustomerBeanI customerBean;
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession httpSession = req.getSession();
+        renderPage(req, resp, 3, Customer.class, customerBean.list(new Customer()));
+    }
 
-        new AppPage().renderHtml(req, resp, 1,
-                HtmlComponent.form(Customer.class));
-
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        customerBean.addOrUpdate(serializeForm(Customer.class, req.getParameterMap()));
+        resp.sendRedirect("./customers");
     }
 }

@@ -1,28 +1,39 @@
 package com.asule.app.bean;
 
-import com.asule.app.model.entity.User;
-import com.asule.database.Database;
+import com.asule.app.model.User;
+import com.asule.app.utility.HashText;
+import com.asule.database.MysqlDatabase;
 
+import javax.ejb.EJB;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.List;
 
+@Stateless
+@Remote
 public class AuthBean implements AuthBeanI, Serializable {
 
-    Database database = Database.getDbInstance();
+    @EJB
+    MysqlDatabase database;
+
+    @Inject
+    private HashText hashText;
 
     public User authenticate(User loginUser) {
 
-        User userDetails = null;
-
-        for (User user : database.getUsers()) {
-            if (loginUser.getUsername().equals(user.getUsername())
-                    && loginUser.getPassword().equals(user.getPassword())) {
-                userDetails = user;
-
-                break;
-
-            }
+        try {
+            loginUser.setPassword(hashText.hash(loginUser.getPassword()));
+        } catch (Exception ex){
+            throw new RuntimeException(ex.getMessage());
         }
 
-        return userDetails;
+        List<User> users = database.fetch(loginUser);
+
+        if (users.isEmpty() || users.get(0) == null)
+            throw new RuntimeException("Invalid user!!");
+
+        return users.get(0);
     }
 }

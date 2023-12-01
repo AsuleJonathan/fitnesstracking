@@ -3,17 +3,17 @@ version: '3'
 services:
   mysqld:
     image: mysql:latest
-    container_name: fitnesstracking1
+    container_name: fitnesstracking
     restart: always
     env_file:
       - .env
     volumes:
       - mysql-data:/var/lib/mysql
 
-  bima-app:
-    image: fitnesstracking1
+  fitness-tracking:
+    image: myfitnesstracking
     ports:
-      - "8081:8081"
+      - "8081:8081" 
     depends_on:
       - mysqld
     environment:

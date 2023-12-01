@@ -7,3 +7,5 @@ sonar-project.properties
 /src/test/test.iml
 *.iml
 /modules
+/mysql-connector-java-8.0.17.jar
+/myansibleenv

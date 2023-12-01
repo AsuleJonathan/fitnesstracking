@@ -1,10 +1,12 @@
 package com.asule.app.bean;
 
-import com.asule.app.model.entity.User;
+import com.asule.app.model.User;
 
-public interface UserBeanI {
+import java.sql.SQLException;
 
-    boolean register(User user);
+public interface UserBeanI extends GenericBeanI<User>{
+
+    boolean register(User user) throws SQLException;
 
     boolean unregister(User user);
 }
