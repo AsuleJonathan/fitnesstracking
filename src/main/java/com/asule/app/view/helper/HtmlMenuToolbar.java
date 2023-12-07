@@ -14,14 +14,12 @@ public class HtmlMenuToolbar implements HtmlMenu,Serializable {
 
     {
         links.add(new MenuLink("./home", "Home", MenuLinkStatus.ACTIVE));
-        links.add(new MenuLink(".members", "Members", MenuLinkStatus.NOT_ACTIVE));
-        links.add(new MenuLink(".fitness", "Fitness", MenuLinkStatus.NOT_ACTIVE));
+        links.add(new MenuLink("./members", "Members", MenuLinkStatus.NOT_ACTIVE));
+        links.add(new MenuLink("./fitnesss", "fitnesss", MenuLinkStatus.NOT_ACTIVE));
         links.add(new MenuLink("./customers", "Customers", MenuLinkStatus.NOT_ACTIVE));
-        links.add(new MenuLink("./workout", "Workout", MenuLinkStatus.NOT_ACTIVE));
-        links.add(new MenuLink("./bills", "Bills", MenuLinkStatus.NOT_ACTIVE));
+        links.add(new MenuLink("./workout", "workout", MenuLinkStatus.NOT_ACTIVE));
+        links.add(new MenuLink("./bills", "Bills", MenuLinkStatus.NOT_ACTIVE)); 
         links.add(new MenuLink("./reports", "Reports", MenuLinkStatus.NOT_ACTIVE));
-        links.add(new MenuLink("./items", "Items", MenuLinkStatus.NOT_ACTIVE));
-        links.add(new MenuLink("./atm", "Atm", MenuLinkStatus.NOT_ACTIVE));
         links.add(new MenuLink("./logout", "Logout", MenuLinkStatus.NOT_ACTIVE));
     }
 

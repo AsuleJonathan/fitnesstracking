@@ -3,11 +3,11 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Accounting Software</display-name>
+  <display-name>membering Software</display-name>
 
   <context-param>
     <param-name>AppName</param-name>
-    <param-value>Systech Accounting Software - Training</param-value>
+    <param-value>Systech membering Software - Training</param-value>
   </context-param>
 
 </web-app>

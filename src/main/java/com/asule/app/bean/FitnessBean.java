@@ -1,48 +1,62 @@
 package com.asule.app.bean;
 
+import com.asule.app.model.AuditLog;
 import com.asule.app.model.Fitness;
-import com.asule.app.utility.FitnessNoGenerator;
-import com.asule.app.utility.FitnessValidator;
+import com.asule.app.utility.MemberNoGenerator;
 
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import javax.inject.Named;
+import java.text.DateFormat;
 import java.util.Date;
 
 @Stateless
-public class FitnessBean extends GenericBean<Fitness> implements FitnessBeanI{
+public class FitnessBean extends GenericBean<Fitness> implements FitnessBeanI {
 
     @Inject
-    private FitnessNoGenerator  fitnessNoGenerator;
+    @Named("fitness")
+    private MemberNoGenerator txnNoGenerator;
 
     @Inject
-    private FitnessValidator fitnessValidator;
+    private Event<AuditLog> logger;
 
     @Override
-    public void addOrUpdate(Fitness journal) {
-        if (fitnessValidator.inValid(journal))
-            throw new RuntimeException("Invalid journal");
+    public void addOrUpdate(Fitness fitness) {
+        if (inValid(fitness))
+            throw new RuntimeException("Invalid fitness");
 
-        if (journal.getDate() == null)
-            journal.setDate(new Date());
+        if (fitness.getDate() == null)
+            fitness.setDate(new Date());
 
-        journal.setJournalNo( fitnessNoGenerator.generate());
-        getDao().addOrUpdate(journal);
+        fitness.setfitnessNo(txnNoGenerator.generate());
 
+        getDao().addOrUpdate(fitness);
+
+        AuditLog log = new AuditLog();
+        log.setLogDetails("A fitness " + fitness.getfitnessNo() + " was added at "
+                + DateFormat.getDateTimeInstance().format(new Date()));
+
+        logger.fire(log);
     }
 
     @Inject
-    public void logInjection(){
+    public void logInjection() {
         System.out.println("this method is executed through injection...0");
     }
 
     @Inject
-    public void logInjection1(){
+    public void logInjection1() {
         System.out.println("this method is executed through injection....1");
     }
 
     @Inject
-    public void logInjection2(){
+    public void logInjection2() {
         System.out.println("this method is executed through injection....2");
     }
 
+    private boolean inValid(Fitness fitness) {
+        // Implement your validation logic here
+        return false;
+    }
 }

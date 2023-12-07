@@ -1,41 +1,33 @@
 package com.asule.app.model;
 
 import com.asule.app.view.helper.*;
-import com.asule.database.helper.DbTable;
-import com.asule.database.helper.DbTableColumn;
+import org.hibernate.annotations.Formula;
 
-import java.io.Serializable;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@DbTable(name = "fitness")
-@HtmlTable(addUrl = ".fitness?action=add")
-@HtmlForm(label = "Journal", url = ".fitness")
+@Entity
+@Table(name = "fitnesss")
+@HtmlTable(addUrl = "./fitnesss?action=add")
+@HtmlForm(label = "fitness", url = "./fitnesss")
 public class Fitness extends BaseEntity {
 
     @HtmlTableColHeader(header = "Date", dateFormat = "dd MMM yyyy")
-    @DbTableColumn(name = "txn_date", definition = "DATE")
+    @Column(name = "txn_date")
+    @Temporal(TemporalType.DATE)
     @HtmlFormField(label = "Transaction Date", type = HtmlFormFieldType.DATE, required = true)
     private Date date;
 
-    @DbTableColumn(name = "journal_no")
-    @HtmlTableColHeader(header = "Journal No")
-    private String journalNo;
+    @Column(name = "fitness_no", nullable = false, unique = true)
+    @HtmlTableColHeader(header = "fitness No")
+    private String fitnessNo;
 
-    @DbTableColumn(name = "particulars")
+    @Column(name = "particulars", columnDefinition = "longtext")
     @HtmlTableColHeader(header = "Particulars")
     @HtmlFormField(label = "Particulars", required = true)
     private String memo;
 
-    @DbTableColumn(name = "debit", definition = "decimal(10,2)")
-    @HtmlTableColHeader(header = "Debit", numberFormat = "#,###.00")
-    @HtmlFormField(label = "Debit Amount", type = HtmlFormFieldType.NUMBER)
-    private BigDecimal debitBalance;
-
-    @DbTableColumn(name = "credit", definition = "decimal(10,2)")
-    @HtmlTableColHeader(header = "Credit", numberFormat = "#,###.00")
-    @HtmlFormField(label = "Credit Amount", type = HtmlFormFieldType.NUMBER)
-    private BigDecimal creditBalance;
 
     public Date getDate() {
         return date;
@@ -45,12 +37,12 @@ public class Fitness extends BaseEntity {
         this.date = date;
     }
 
-    public String getJournalNo() {
-        return journalNo;
+    public String getfitnessNo() {
+        return fitnessNo;
     }
 
-    public void setJournalNo(String journalNo) {
-        this.journalNo = journalNo;
+    public void setfitnessNo(String fitnessNo) {
+        this.fitnessNo = fitnessNo;
     }
 
     public String getMemo() {
@@ -61,19 +53,4 @@ public class Fitness extends BaseEntity {
         this.memo = memo;
     }
 
-    public BigDecimal getDebitBalance() {
-        return debitBalance;
-    }
-
-    public void setDebitBalance(BigDecimal debitBalance) {
-        this.debitBalance = debitBalance;
-    }
-
-    public BigDecimal getCreditBalance() {
-        return creditBalance;
-    }
-
-    public void setCreditBalance(BigDecimal creditBalance) {
-        this.creditBalance = creditBalance;
-    }
 }

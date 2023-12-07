@@ -4,29 +4,27 @@ import com.asule.app.view.helper.HtmlForm;
 import com.asule.app.view.helper.HtmlFormField;
 import com.asule.app.view.helper.HtmlTable;
 import com.asule.app.view.helper.HtmlTableColHeader;
-import com.asule.database.helper.DbTable;
-import com.asule.database.helper.DbTableColumn;
 
-import java.io.Serializable;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-@DbTable(name = "customers")
+@Entity
+@Table(name = "customers")
 @HtmlTable(addUrl = "./customers?action=add")
 @HtmlForm(label = "Customer", url = "./customers")
 public class Customer extends BaseEntity {
 
-    @DbTableColumn(name = "name")
+    @Column(name = "name")
     @HtmlTableColHeader(header = "Customer Name")
     @HtmlFormField(label = "Customer Name", required = true)
     private String name;
 
-    @DbTableColumn(name = "address")
-    @HtmlTableColHeader(header = "Customer Address")
-    @HtmlFormField(label = "Customer Address", required = true)
-    private String address;
+    @Transient
+    @HtmlTableColHeader(header = "member Balance")
+    private BigDecimal memberBalance;
 
-    @HtmlTableColHeader(header = "Account Balance")
-    private BigDecimal accountBalance;
+    @Embedded
+    private Address address;
 
     public String getName() {
         return name;
@@ -36,19 +34,19 @@ public class Customer extends BaseEntity {
         this.name = name;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
-    public BigDecimal getAccountBalance() {
-        return accountBalance;
+    public BigDecimal getmemberBalance() {
+        return memberBalance;
     }
 
-    public void setAccountBalance(BigDecimal accountBalance) {
-        this.accountBalance = accountBalance;
+    public void setmemberBalance(BigDecimal memberBalance) {
+        this.memberBalance = memberBalance;
     }
 }

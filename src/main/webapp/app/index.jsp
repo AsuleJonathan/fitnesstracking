@@ -1,5 +1,5 @@
 <%@ page isELIgnored="false" %>
-<%@ page import="com.asule.app.view.helper.HtmlMenuToolbar" %>
+<%@ page import="com.bavon.app.view.helper.HtmlMenuToolbar" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,7 @@
     </head>
 
     <body>
-        <jsp:useBean id="htmlMenuToolBar" class="com.asule.app.view.helper.HtmlMenuToolbar" />
+        <jsp:useBean id="htmlMenuToolBar" class="com.bavon.app.view.helper.HtmlMenuToolbar" />
         <jsp:setProperty name="htmlMenuToolBar" property="activeLink" value='${requestScope.activeMenu}' />
         ${htmlMenuToolBar.menu}
 

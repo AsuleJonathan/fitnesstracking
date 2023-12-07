@@ -12,20 +12,22 @@ import javax.ejb.Stateless;
 public class MemberBean extends GenericBean<Member> implements MemberBeanI {
 
     @PostConstruct
-    public void init() {
-        System.out.println("Bean has been created!!");
+    public void init(){
+        System.out.println("Bean has bean created!!");
     }
 
     @Override
-    public void addOrUpdate(Member account) {
-        if (account.getType() == null)
-            throw new RuntimeException("Invalid account type");
+    public void addOrUpdate(Member member) {
+        if (member.getType() == null)
+            throw new RuntimeException("Invalid member type");
 
-        getDao().addOrUpdate(account);
+        getDao().addOrUpdate(member);
+
     }
 
     @PreDestroy
-    public void atDestruction() {
+    public void atDestruction(){
 
     }
+
 }

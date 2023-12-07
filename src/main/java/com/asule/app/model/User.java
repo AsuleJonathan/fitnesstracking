@@ -1,24 +1,48 @@
 package com.asule.app.model;
 
-import com.asule.database.helper.DbTable;
-import com.asule.database.helper.DbTableColumn;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
+import javax.persistence.*;
 
 
-@DbTable(name = "users")
+@Entity
+@Table(name = "users")
+@DynamicInsert
+@DynamicUpdate
 public class User extends BaseEntity {
 
-    @DbTableColumn(name = "username")
+    @Column(name = "username")
     private String username;
 
-    @DbTableColumn(name = "password")
+    @Column(name = "password")
     private String password;
 
+    @Embedded
+    private Address address;
+
+    @Embedded
+    private Contact contact;
+
+    @Transient
     private String confirmPassword;
+
+    @Transient
+    private String oldPassword;
 
     public User(){}
 
+    public User(String username) {
+        this.username = username;
+    }
+
     public User(Long id, String username, String password) {
         setId(id);
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -45,5 +69,29 @@ public class User extends BaseEntity {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 }

@@ -21,7 +21,7 @@
             <span style="font-weight:bold;font-size:16px;">Login</span>
             <form action="./login" method="post">
 
-              <jsp:useBean id="loginForm" class="com.asule.app.userbean.LoginForm" scope="page"/>
+              <jsp:useBean id="loginForm" class="com.bavon.app.userbean.LoginForm" scope="page"/>
 
               <div class="container">
                 <label for="username"><b>Username</b></label>
@@ -34,11 +34,11 @@
               </div>
 
               <div class="container">
-                <span class="psw">Forgot <a href="#">password?</a></span>
+                <span class="psw">Reset <a href="resetpwd.jsp">password?</a></span>
               </div>
             </form>
 
-            <span style="font-weight:bold;font-size:13px;color:red;">Dont Have An Account? <a href="register.jsp">Register</a></span>
+            <span style="font-weight:bold;font-size:13px;color:red;">Dont Have An member? <a href="register.jsp">Register</a></span>
 
         </c:otherwise>
     </c:choose>

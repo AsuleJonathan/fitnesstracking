@@ -1,68 +1,59 @@
 package com.asule.app.model;
 
 import com.asule.app.view.helper.*;
-import com.asule.database.helper.DbTable;
-import com.asule.database.helper.DbTableColumn;
 
-import java.math.BigDecimal;
+import javax.persistence.*;
 import java.util.Date;
 
 
-@DbTable(name = "workouts")
-@HtmlTable(addUrl = "./workouts?action=add")
-@HtmlForm(label = "Invoice", url = "./workouts")
+@Entity
+@Table(name = "workout")
+@HtmlTable(addUrl = "./workout?action=add")
+@HtmlForm(label = "workout", url = "./workout")
 public class Workout extends BaseEntity {
 
+    @Column(name = "workout_date")
+    @Temporal(TemporalType.DATE)
     @HtmlTableColHeader(header = "Date", dateFormat = "dd/MM/yyy")
-    @HtmlFormField(label = "Invoice Date", type = HtmlFormFieldType.DATE, required = true)
-    private Date invoiceDate;
+    @HtmlFormField(label = "workout Date", type = HtmlFormFieldType.DATE, required = true)
+    private Date workoutDate;
 
-    @DbTableColumn(name = "invoice_no")
-    @HtmlTableColHeader(header = "Invoice Number")
-    @HtmlFormField(label = "Invoice Number", required = true)
-    private String invoiceNo;
+    @Column(name = "workout_no")
+    @HtmlTableColHeader(header = "workout Number")
+    private String workoutNo;
 
-    @DbTableColumn(name = "total")
-    @HtmlTableColHeader(header = "Total", numberFormat = "#,###.##")
-    private BigDecimal total;
 
-    @DbTableColumn(name = "narration")
+
+    @Column(name = "narration",columnDefinition = "text")
     @HtmlTableColHeader(header = "Narration")
     @HtmlFormField(label = "Narration", required = true)
     private String narration;
 
-    private Fitness journal;
+    @Transient
+    private Fitness fitness;
 
-   public Date getInvoiceDate() {
-        return invoiceDate;
+   public Date getworkoutDate() {
+        return workoutDate;
     }
 
-    public void setInvoiceDate(Date invoiceDate) {
-        this.invoiceDate = invoiceDate;
+    public void setworkoutDate(Date workoutDate) {
+        this.workoutDate = workoutDate;
     }
 
-    public String getInvoiceNo() {
-        return invoiceNo;
+    public String getworkoutNo() {
+        return workoutNo;
     }
 
-    public void setInvoiceNo(String invoiceNo) {
-        this.invoiceNo = invoiceNo;
+    public void setworkoutNo(String workoutNo) {
+        this.workoutNo = workoutNo;
     }
 
-    public Fitness getJournal() {
-        return journal;
+    public Fitness getfitness() {
+        return fitness;
     }
 
-    public void setJournal(Fitness journal) {
-        this.journal = journal;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
+    public void setfitness(Fitness fitness) {
+        this.fitness = fitness;
     }
 
     public String getNarration() {

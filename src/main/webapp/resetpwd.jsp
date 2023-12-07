@@ -76,17 +76,20 @@ span.psw {
 <span style="font-weight:bold;font-size:13px;">Login</span>
 
 <span style="font-weight:bold;font-size:13px;color:red;">Have An member? <a href="index.jsp">Login</a></span>
-<form action="./user" method="post">
+<form action="./changepwd" method="post">
 
   <div class="container">
     <label for="username"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="username" required>
 
     <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
+    <input type="password" placeholder="Enter Old Password" name="olPpassword" required>
+
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter New Password" name="password" required>
 
     <label for="confirmPassword"><b>Password</b></label>
-    <input type="password" placeholder="Confirm Enter Password" name="confirmPassword" required>
+    <input type="password" placeholder="Confirm New Password" name="confirmPassword" required>
 
     <button type="submit">Register</button>
   </div>

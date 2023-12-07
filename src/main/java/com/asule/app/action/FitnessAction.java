@@ -11,19 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
-@WebServlet("/fitness")
+@WebServlet("/fitnesss")
 public class FitnessAction extends BaseAction {
 
     @EJB
     FitnessBeanI fitnessBean;
 
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         renderPage(req, resp, 2, Fitness.class, fitnessBean.list(new Fitness()));
+
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        req.getParameterMap().put("date", new String[]{new Date().toString()});
         fitnessBean.addOrUpdate(serializeForm(Fitness.class, req.getParameterMap()));
-        resp.sendRedirect("./fitness");
+
+        resp.sendRedirect("./fitnesss");
+
     }
 }

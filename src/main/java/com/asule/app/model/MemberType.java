@@ -2,11 +2,11 @@ package com.asule.app.model;
 
 public enum MemberType {
 
-    ASSET("Asset"),
-    LIABILITY("Liability"),
-    OWNERS_EQUITY("Owners Equity"),
-    INCOME("Income"),
-    EXPENSE("Expense");
+    UNDERWEIGHT("Underweight"),
+    OVERWEIGHT("Overweight"),
+    AVERAGE("Average Weight"),
+    OBESS("Obess"),
+    UNFIT("Not Fit");
 
     private String name;
 

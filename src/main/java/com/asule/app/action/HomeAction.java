@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @WebServlet("/home")
 public class HomeAction extends BaseAction {
 
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         renderPage(req, resp, 0, Member.class, new ArrayList<Member>());
     }
 

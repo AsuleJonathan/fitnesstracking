@@ -4,45 +4,48 @@ import com.asule.app.view.helper.HtmlForm;
 import com.asule.app.view.helper.HtmlFormField;
 import com.asule.app.view.helper.HtmlTable;
 import com.asule.app.view.helper.HtmlTableColHeader;
-import com.asule.database.helper.DbTable;
-import com.asule.database.helper.DbTableColumn;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-@DbTable(name = "members")
-@HtmlTable(addUrl = ".members?action=add")
-@HtmlForm(label = "Account", url = ".members")
+@Entity
+@Table(name = "members")
+@HtmlTable(addUrl = "./members?action=add")
+@HtmlForm(label = "member", url = "./members")
 public class Member extends BaseEntity {
 
-    @DbTableColumn(name = "account_code")
-    @HtmlTableColHeader(header = "Account Code")
-    @HtmlFormField(label = "Account Code", required = true)
+    @Column(name = "code")
+    @HtmlTableColHeader(header = "member Code")
+    @HtmlFormField(label = "member Code", required = true)
     private String code;
 
-    @DbTableColumn(name = "account_name")
-    @HtmlTableColHeader(header = "Account Name")
-    @HtmlFormField(label = "Account Name", required = true)
+    @Column(name = "member_name")
+    @HtmlTableColHeader(header = "member Name")
+    @HtmlFormField(label = "member Name", required = true)
     private String name;
 
+    @Transient
     private BigDecimal balance;
 
-    @DbTableColumn(name = "notes")
+    @Column(columnDefinition = "longtext")
     private String notes;
 
-    @HtmlFormField(label = "Account Category", required = true)
+    @HtmlFormField(label = "member Category", required = true)
+    @Column
+    @Enumerated(EnumType.STRING)
     private MemberCategory category;
 
-    @HtmlFormField(label = "Account Type", required = true)
+    @HtmlFormField(label = "member Type", required = true)
+    @Column
+    @Enumerated(EnumType.STRING)
     private MemberType type;
 
-    public Member(){
+    public Member(){}
 
-    }
-
-    public Member(String code, String name, BigDecimal balance){
+    public Member(String code, String name){
         this.code = code;
         this.name = name;
-        this.balance = balance;
+      
     }
 
     public String getCode() {
@@ -59,14 +62,6 @@ public class Member extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
     }
 
     public String getNotes() {

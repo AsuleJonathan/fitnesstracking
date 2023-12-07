@@ -14,15 +14,17 @@ import java.io.IOException;
 public class MemberAction extends BaseAction {
 
     @EJB
-    private MemberBeanI memberBean;
+    private MemberBeanI MemberBean;
 
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        renderPage(req, resp, 1, Member.class, memberBean.list(new Member()));
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        renderPage(req, resp, 1,  Member.class, MemberBean.list(new Member()));
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        memberBean.addOrUpdate(serializeForm(Member.class, req.getParameterMap()));
+        MemberBean.addOrUpdate(serializeForm(Member.class, req.getParameterMap()));
+
         resp.sendRedirect("./members");
+
     }
 
 }

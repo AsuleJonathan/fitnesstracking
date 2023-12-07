@@ -1,14 +1,16 @@
 package com.asule.app.model;
 
-import com.asule.database.helper.DbTableColumn;
-import com.asule.database.helper.DbTableId;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
-public class BaseEntity implements Serializable {
+@MappedSuperclass
+public abstract class BaseEntity implements Serializable {
 
-    @DbTableId
-    @DbTableColumn(name = "id", definition = "int")
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
     public Long getId() {
