@@ -17,7 +17,7 @@ public class NavbarBean implements Serializable {
         this.menu = "  <div class=\"navbarContainer\" >\n" +
                 "    <nav class=\"navClass\">\n" +
                 "        <div class=\"title\">\n" +
-                "            <a href=\"./home\">Etciket</a>\n" +
+                "            <a href=\"./home\"> Fitness Tracker</a>\n" +
                 "        </div>\n" +
                 "        <div class=\"links\" >\n" +
                 "           <a href=\"./home\">HOME</a>\n" +
